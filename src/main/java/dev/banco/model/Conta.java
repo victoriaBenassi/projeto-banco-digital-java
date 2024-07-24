@@ -1,5 +1,7 @@
 package main.java.dev.banco.model;
+import lombok.Data;
 
+@Data
 public abstract class Conta implements IConta{
 
     private static final int AGENCIA_PADRAO = 0001;
@@ -8,7 +10,7 @@ public abstract class Conta implements IConta{
     protected int agencia;
     protected int numero;
     protected double saldo;
-    private Cliente cliente;
+    protected Cliente cliente;
 
     public Conta(Cliente cliente) {
         this.agencia = Conta.AGENCIA_PADRAO;
@@ -27,15 +29,6 @@ public abstract class Conta implements IConta{
     public void transferir(double valor, Conta contadestino) {
         this.sacar(valor); //sacar o valor da minha conta
         contadestino.depositar(valor); //e depositar na conta destino
-    }
-    public int getAgencia() {
-        return agencia;
-    }
-    public int getNumero() {
-        return numero;
-    }
-    public double getSaldo() {
-        return saldo;
     }
     protected void imprimirInfosComuns() {
         System.out.println(String.format("Titular: %s", this.cliente.getNome()));
